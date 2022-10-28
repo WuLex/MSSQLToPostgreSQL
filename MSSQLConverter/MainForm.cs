@@ -1,4 +1,5 @@
 ﻿using MSSQLConverter.Classes;
+using Sunny.UI;
 using System.Data;
 
 namespace MSSQLConverter
@@ -6,7 +7,7 @@ namespace MSSQLConverter
     /// <summary>
     /// Description of MainForm.
     /// </summary>
-    public partial class MainForm : Form
+    public partial class MainForm : UIForm
     {
         private MSSQL g_SQLServer = null;
         private PostgreSQL g_PgSQL = null;
@@ -71,8 +72,7 @@ namespace MSSQLConverter
             g_SQLServer = GetMSSQL();
             g_PgSQL = GetPgSQL();
             g_settings = (Settings)SettingspropertyGrid.SelectedObject;
-
-            Converter converter = new MSSQLConverter.Classes.Converter(g_SQLServer, g_PgSQL, g_settings);
+            Converter converter = new Converter(g_SQLServer, g_PgSQL, g_settings);
         }
 
         private MSSQL GetMSSQL()
@@ -119,17 +119,21 @@ namespace MSSQLConverter
 
                 mapDS.Tables.Add(mapDT);
 
-                DataColumn MsSQLCol = new DataColumn("MSSQLTypes");
-                MsSQLCol.Caption = "MSSQL Type";
-                MsSQLCol.DataType = typeof(string);
-                MsSQLCol.MaxLength = 350;
+                using (DataColumn MsSQLCol = new DataColumn("MSSQLTypes"))
+                {
+                    MsSQLCol.Caption = "MSSQL Type";
+                    MsSQLCol.DataType = typeof(string);
+                    MsSQLCol.MaxLength = 350;
 
-                DataColumn PgSQLCol = new DataColumn("PgSQLTypes");
-                PgSQLCol.Caption = "PostgreSQL Type";
-                PgSQLCol.DataType = typeof(string);
-                PgSQLCol.MaxLength = 350;
+                    using (DataColumn PgSQLCol = new DataColumn("PgSQLTypes"))
+                    {
+                        PgSQLCol.Caption = "PostgreSQL Type";
+                        PgSQLCol.DataType = typeof(string);
+                        PgSQLCol.MaxLength = 350;
 
-                mapDT.Columns.AddRange(new DataColumn[] { MsSQLCol, PgSQLCol });
+                        mapDT.Columns.AddRange(new DataColumn[] { MsSQLCol, PgSQLCol });
+                    }
+                }
 
                 AddDataTypesDefaults(mapDT);
 
@@ -207,27 +211,32 @@ namespace MSSQLConverter
 
         private void FetchSQLObjects()
         {
-            string FetchTableQry = @"SELECT TABLE_CATALOG,TABLE_SCHEMA,TABLE_NAME, TABLE_TYPE FROM INFORMATION_SCHEMA.TABLES " +
-                                    "WHERE TABLE_TYPE = N'BASE TABLE' AND TABLE_CATALOG = '" + g_SQLServer.Database + "'" +
-                                    " AND TABLE_SCHEMA = N'" + MSSQL_SCHEMA + @"' ORDER BY TABLE_NAME";
+            string FetchTableQry =
+                @"SELECT TABLE_CATALOG,TABLE_SCHEMA,TABLE_NAME, TABLE_TYPE FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_TYPE = N'BASE TABLE' AND TABLE_CATALOG = '" + g_SQLServer.Database + "'" +
+                " AND TABLE_SCHEMA = N'" + MSSQL_SCHEMA + @"' ORDER BY TABLE_NAME";
 
             DataTable tableList = g_SQLServer.ExecuteQuery(FetchTableQry);
 
             foreach (DataRow rw in tableList.Rows)
             {
-                string tableName = rw["TABLE_NAME"].ToString();
+                string? tableName = rw["TABLE_NAME"].ToString();
 
-                TreeNode li = new TreeNode(tableName, 0, 0); //new ListViewItem(tableName,0,new ListViewGroup("Table","Table"));
+                TreeNode
+                    li = new TreeNode(tableName, 0,
+                        0); //new ListViewItem(tableName,0,new ListViewGroup("Table","Table"));
 
                 SQLObjectstreeView.Nodes[0].Nodes.Add(li);
 
                 string FetchColInfo = "SELECT TABLE_CATALOG,TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME,ORDINAL_POSITION, " +
                                       "COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE,CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE FROM INFORMATION_SCHEMA.COLUMNS " +
-                                      "WHERE TABLE_NAME=N'" + tableName + "' AND TABLE_CATALOG = N'" + g_SQLServer.Database + "' AND TABLE_SCHEMA =N'" + MSSQL_SCHEMA + "' ORDER BY ORDINAL_POSITION ";
+                                      "WHERE TABLE_NAME=N'" + tableName + "' AND TABLE_CATALOG = N'" +
+                                      g_SQLServer.Database + "' AND TABLE_SCHEMA =N'" + MSSQL_SCHEMA +
+                                      "' ORDER BY ORDINAL_POSITION ";
 
                 DataTable TableColumns = g_SQLServer.ExecuteQuery(FetchColInfo);
 
-                TreeNode colName = null;
+                TreeNode? colName = null;
 
                 foreach (DataRow colRow in TableColumns.Rows)
                 {
@@ -239,10 +248,14 @@ namespace MSSQLConverter
                     TreeNode colNumPrec = new TreeNode(colRow["NUMERIC_PRECISION"].ToString(), 2, 2);
                     TreeNode colNumScale = new TreeNode(colRow["NUMERIC_SCALE"].ToString(), 2, 2);
 
-                    colName.Nodes.AddRange(new TreeNode[] { colDefault, colNullable, colDataType, colCharMaxlength, colNumPrec, colNumScale });
+                    colName.Nodes.AddRange(new TreeNode[]
+                        { colDefault, colNullable, colDataType, colCharMaxlength, colNumPrec, colNumScale });
                 }
 
-                if (colName != null) { li.Nodes.Add(colName); }
+                if (colName != null)
+                {
+                    li.Nodes.Add(colName);
+                }
             }
         }
 

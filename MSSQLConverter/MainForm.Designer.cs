@@ -100,7 +100,7 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1394, 132);
@@ -134,10 +134,10 @@
             // 
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 183);
+            this.panel2.Location = new System.Drawing.Point(0, 218);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1394, 646);
+            this.panel2.Size = new System.Drawing.Size(1394, 611);
             this.panel2.TabIndex = 1;
             // 
             // tabControl1
@@ -150,7 +150,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1394, 646);
+            this.tabControl1.Size = new System.Drawing.Size(1394, 611);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -158,11 +158,11 @@
             this.tabPage1.Controls.Add(this.SettingspropertyGrid);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 36);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1386, 613);
+            this.tabPage1.Size = new System.Drawing.Size(1386, 571);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "配置";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -200,7 +200,7 @@
             this.label10.Location = new System.Drawing.Point(18, 239);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(69, 20);
+            this.label10.Size = new System.Drawing.Size(92, 27);
             this.label10.TabIndex = 8;
             this.label10.Text = "登录信息";
             // 
@@ -209,7 +209,7 @@
             this.PgPorttextBox.Location = new System.Drawing.Point(18, 199);
             this.PgPorttextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PgPorttextBox.Name = "PgPorttextBox";
-            this.PgPorttextBox.Size = new System.Drawing.Size(104, 27);
+            this.PgPorttextBox.Size = new System.Drawing.Size(104, 34);
             this.PgPorttextBox.TabIndex = 7;
             // 
             // label9
@@ -218,7 +218,7 @@
             this.label9.Location = new System.Drawing.Point(18, 171);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 20);
+            this.label9.Size = new System.Drawing.Size(52, 27);
             this.label9.TabIndex = 6;
             this.label9.Text = "端口";
             // 
@@ -242,7 +242,7 @@
             this.PgPasstextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PgPasstextBox.Name = "PgPasstextBox";
             this.PgPasstextBox.PasswordChar = '*';
-            this.PgPasstextBox.Size = new System.Drawing.Size(238, 27);
+            this.PgPasstextBox.Size = new System.Drawing.Size(238, 34);
             this.PgPasstextBox.TabIndex = 4;
             // 
             // PgUsertextBox
@@ -250,7 +250,7 @@
             this.PgUsertextBox.Location = new System.Drawing.Point(102, 20);
             this.PgUsertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PgUsertextBox.Name = "PgUsertextBox";
-            this.PgUsertextBox.Size = new System.Drawing.Size(238, 27);
+            this.PgUsertextBox.Size = new System.Drawing.Size(238, 34);
             this.PgUsertextBox.TabIndex = 3;
             // 
             // label5
@@ -276,7 +276,7 @@
             this.PgDatabasetextBox.Location = new System.Drawing.Point(18, 135);
             this.PgDatabasetextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PgDatabasetextBox.Name = "PgDatabasetextBox";
-            this.PgDatabasetextBox.Size = new System.Drawing.Size(364, 27);
+            this.PgDatabasetextBox.Size = new System.Drawing.Size(364, 34);
             this.PgDatabasetextBox.TabIndex = 3;
             // 
             // label7
@@ -285,7 +285,7 @@
             this.label7.Location = new System.Drawing.Point(18, 108);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 20);
+            this.label7.Size = new System.Drawing.Size(72, 27);
             this.label7.TabIndex = 2;
             this.label7.Text = "数据库";
             // 
@@ -294,7 +294,7 @@
             this.PgServertextBox.Location = new System.Drawing.Point(18, 69);
             this.PgServertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PgServertextBox.Name = "PgServertextBox";
-            this.PgServertextBox.Size = new System.Drawing.Size(364, 27);
+            this.PgServertextBox.Size = new System.Drawing.Size(364, 34);
             this.PgServertextBox.TabIndex = 1;
             // 
             // label8
@@ -303,7 +303,7 @@
             this.label8.Location = new System.Drawing.Point(18, 41);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(193, 20);
+            this.label8.Size = new System.Drawing.Size(256, 27);
             this.label8.TabIndex = 0;
             this.label8.Text = "PostgreSQL服务器 名称/IP";
             // 
@@ -357,7 +357,7 @@
             this.SQLPasstextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLPasstextBox.Name = "SQLPasstextBox";
             this.SQLPasstextBox.PasswordChar = '*';
-            this.SQLPasstextBox.Size = new System.Drawing.Size(238, 27);
+            this.SQLPasstextBox.Size = new System.Drawing.Size(238, 34);
             this.SQLPasstextBox.TabIndex = 4;
             // 
             // SQLUsertextBox
@@ -365,7 +365,7 @@
             this.SQLUsertextBox.Location = new System.Drawing.Point(102, 20);
             this.SQLUsertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLUsertextBox.Name = "SQLUsertextBox";
-            this.SQLUsertextBox.Size = new System.Drawing.Size(238, 27);
+            this.SQLUsertextBox.Size = new System.Drawing.Size(238, 34);
             this.SQLUsertextBox.TabIndex = 3;
             // 
             // label4
@@ -374,7 +374,7 @@
             this.label4.Location = new System.Drawing.Point(9, 60);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 20);
+            this.label4.Size = new System.Drawing.Size(103, 27);
             this.label4.TabIndex = 2;
             this.label4.Text = "Password";
             // 
@@ -384,7 +384,7 @@
             this.label3.Location = new System.Drawing.Point(9, 25);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
+            this.label3.Size = new System.Drawing.Size(108, 27);
             this.label3.TabIndex = 1;
             this.label3.Text = "Username";
             // 
@@ -404,7 +404,7 @@
             this.SQLDatabasetextBox.Location = new System.Drawing.Point(18, 131);
             this.SQLDatabasetextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLDatabasetextBox.Name = "SQLDatabasetextBox";
-            this.SQLDatabasetextBox.Size = new System.Drawing.Size(364, 27);
+            this.SQLDatabasetextBox.Size = new System.Drawing.Size(364, 34);
             this.SQLDatabasetextBox.TabIndex = 3;
             // 
             // label2
@@ -413,7 +413,7 @@
             this.label2.Location = new System.Drawing.Point(18, 104);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
+            this.label2.Size = new System.Drawing.Size(72, 27);
             this.label2.TabIndex = 2;
             this.label2.Text = "数据库";
             // 
@@ -422,7 +422,7 @@
             this.SQLServertextBox.Location = new System.Drawing.Point(18, 65);
             this.SQLServertextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLServertextBox.Name = "SQLServertextBox";
-            this.SQLServertextBox.Size = new System.Drawing.Size(364, 27);
+            this.SQLServertextBox.Size = new System.Drawing.Size(364, 34);
             this.SQLServertextBox.TabIndex = 1;
             // 
             // label1
@@ -431,18 +431,18 @@
             this.label1.Location = new System.Drawing.Point(18, 37);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 20);
+            this.label1.Size = new System.Drawing.Size(201, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "SQL Server Instance";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.MappingsdataGridView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 36);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1386, 613);
+            this.tabPage2.Size = new System.Drawing.Size(1386, 606);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "映射";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -455,17 +455,17 @@
             this.MappingsdataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MappingsdataGridView.Name = "MappingsdataGridView";
             this.MappingsdataGridView.RowHeadersWidth = 51;
-            this.MappingsdataGridView.Size = new System.Drawing.Size(1378, 603);
+            this.MappingsdataGridView.Size = new System.Drawing.Size(1378, 596);
             this.MappingsdataGridView.TabIndex = 0;
             // 
             // SQLObjtabPage
             // 
             this.SQLObjtabPage.Controls.Add(this.SQLObjectstreeView);
-            this.SQLObjtabPage.Location = new System.Drawing.Point(4, 29);
+            this.SQLObjtabPage.Location = new System.Drawing.Point(4, 36);
             this.SQLObjtabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLObjtabPage.Name = "SQLObjtabPage";
             this.SQLObjtabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.SQLObjtabPage.Size = new System.Drawing.Size(1386, 613);
+            this.SQLObjtabPage.Size = new System.Drawing.Size(1386, 606);
             this.SQLObjtabPage.TabIndex = 2;
             this.SQLObjtabPage.Text = "选择 SQL 对象";
             this.SQLObjtabPage.UseVisualStyleBackColor = true;
@@ -484,7 +484,7 @@
             this.SQLObjectstreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.SQLObjectstreeView.SelectedImageIndex = 0;
-            this.SQLObjectstreeView.Size = new System.Drawing.Size(1378, 603);
+            this.SQLObjectstreeView.Size = new System.Drawing.Size(1378, 596);
             this.SQLObjectstreeView.TabIndex = 0;
             this.SQLObjectstreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SQLObjectstreeViewAfterSelect);
             // 
@@ -525,7 +525,7 @@
             this.SaveMaptoolStripButton,
             this.toolStripSeparator2,
             this.ClosetoolStripButton});
-            this.MaintoolStrip.Location = new System.Drawing.Point(0, 132);
+            this.MaintoolStrip.Location = new System.Drawing.Point(0, 167);
             this.MaintoolStrip.Name = "MaintoolStrip";
             this.MaintoolStrip.Size = new System.Drawing.Size(1394, 51);
             this.MaintoolStrip.TabIndex = 13;
@@ -572,8 +572,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1394, 855);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.MaintoolStrip);
@@ -581,8 +580,8 @@
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MSSQL转换工具";
+            this.ZoomScaleRect = new System.Drawing.Rectangle(19, 19, 1394, 855);
             this.Load += new System.EventHandler(this.MainFormLoad);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
