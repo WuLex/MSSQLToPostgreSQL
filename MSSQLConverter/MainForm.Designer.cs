@@ -32,7 +32,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Objects Found");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Objects Found");
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -211,6 +211,7 @@
             this.PgPorttextBox.Name = "PgPorttextBox";
             this.PgPorttextBox.Size = new System.Drawing.Size(104, 34);
             this.PgPorttextBox.TabIndex = 7;
+            this.PgPorttextBox.Text = "5432";
             // 
             // label9
             // 
@@ -252,6 +253,7 @@
             this.PgUsertextBox.Name = "PgUsertextBox";
             this.PgUsertextBox.Size = new System.Drawing.Size(238, 34);
             this.PgUsertextBox.TabIndex = 3;
+            this.PgUsertextBox.Text = "postgres";
             // 
             // label5
             // 
@@ -278,6 +280,7 @@
             this.PgDatabasetextBox.Name = "PgDatabasetextBox";
             this.PgDatabasetextBox.Size = new System.Drawing.Size(364, 34);
             this.PgDatabasetextBox.TabIndex = 3;
+            this.PgDatabasetextBox.Text = "BlogDB";
             // 
             // label7
             // 
@@ -296,6 +299,7 @@
             this.PgServertextBox.Name = "PgServertextBox";
             this.PgServertextBox.Size = new System.Drawing.Size(364, 34);
             this.PgServertextBox.TabIndex = 1;
+            this.PgServertextBox.Text = "localhost";
             // 
             // label8
             // 
@@ -367,6 +371,7 @@
             this.SQLUsertextBox.Name = "SQLUsertextBox";
             this.SQLUsertextBox.Size = new System.Drawing.Size(238, 34);
             this.SQLUsertextBox.TabIndex = 3;
+            this.SQLUsertextBox.Text = "sa";
             // 
             // label4
             // 
@@ -406,6 +411,7 @@
             this.SQLDatabasetextBox.Name = "SQLDatabasetextBox";
             this.SQLDatabasetextBox.Size = new System.Drawing.Size(364, 34);
             this.SQLDatabasetextBox.TabIndex = 3;
+            this.SQLDatabasetextBox.Text = "BlogDB";
             // 
             // label2
             // 
@@ -424,6 +430,7 @@
             this.SQLServertextBox.Name = "SQLServertextBox";
             this.SQLServertextBox.Size = new System.Drawing.Size(364, 34);
             this.SQLServertextBox.TabIndex = 1;
+            this.SQLServertextBox.Text = ".";
             // 
             // label1
             // 
@@ -442,7 +449,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1386, 606);
+            this.tabPage2.Size = new System.Drawing.Size(1386, 571);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "映射";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -455,7 +462,7 @@
             this.MappingsdataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MappingsdataGridView.Name = "MappingsdataGridView";
             this.MappingsdataGridView.RowHeadersWidth = 51;
-            this.MappingsdataGridView.Size = new System.Drawing.Size(1378, 596);
+            this.MappingsdataGridView.Size = new System.Drawing.Size(1378, 561);
             this.MappingsdataGridView.TabIndex = 0;
             // 
             // SQLObjtabPage
@@ -465,7 +472,7 @@
             this.SQLObjtabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLObjtabPage.Name = "SQLObjtabPage";
             this.SQLObjtabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.SQLObjtabPage.Size = new System.Drawing.Size(1386, 606);
+            this.SQLObjtabPage.Size = new System.Drawing.Size(1386, 571);
             this.SQLObjtabPage.TabIndex = 2;
             this.SQLObjtabPage.Text = "选择 SQL 对象";
             this.SQLObjtabPage.UseVisualStyleBackColor = true;
@@ -479,12 +486,12 @@
             this.SQLObjectstreeView.Location = new System.Drawing.Point(4, 5);
             this.SQLObjectstreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SQLObjectstreeView.Name = "SQLObjectstreeView";
-            treeNode1.Name = "RootNode";
-            treeNode1.Text = "Objects Found";
+            treeNode2.Name = "RootNode";
+            treeNode2.Text = "Objects Found";
             this.SQLObjectstreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.SQLObjectstreeView.SelectedImageIndex = 0;
-            this.SQLObjectstreeView.Size = new System.Drawing.Size(1378, 596);
+            this.SQLObjectstreeView.Size = new System.Drawing.Size(1378, 561);
             this.SQLObjectstreeView.TabIndex = 0;
             this.SQLObjectstreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SQLObjectstreeViewAfterSelect);
             // 

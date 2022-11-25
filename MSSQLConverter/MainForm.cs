@@ -55,8 +55,8 @@ namespace MSSQLConverter
 
             try
             {
-                InitCapturedSettings();
-
+                Converter myConverter = InitCapturedSettings();
+                myConverter.Convert();
                 result = true;
             }
             catch (Exception)
@@ -67,12 +67,14 @@ namespace MSSQLConverter
             return result;
         }
 
-        private void InitCapturedSettings()
+        private Converter InitCapturedSettings()
         {
             g_SQLServer = GetMSSQL();
             g_PgSQL = GetPgSQL();
             g_settings = (Settings)SettingspropertyGrid.SelectedObject;
             Converter converter = new Converter(g_SQLServer, g_PgSQL, g_settings);
+
+            return converter;
         }
 
         private MSSQL GetMSSQL()

@@ -24,14 +24,15 @@ namespace MSSQLConverter.Classes
 
         public override string GetConnectionString()
         {
-            NpgsqlConnectionStringBuilder con = new NpgsqlConnectionStringBuilder();
-
-            con.Host = this.ServerName;
-            con.Database = this.Database;
-            con.IntegratedSecurity = false;
-            con.Username = this.Username;
-            con.Password = this.Password;
-            con.Port = this.Port;
+            NpgsqlConnectionStringBuilder con = new NpgsqlConnectionStringBuilder
+            {
+                Host = this.ServerName,
+                Database = this.Database,
+                IntegratedSecurity = false,
+                Username = this.Username,
+                Password = this.Password,
+                Port = this.Port
+            };
 
             return con.ConnectionString;
         }
@@ -61,7 +62,7 @@ namespace MSSQLConverter.Classes
             }
             finally
             {
-                if (con != null && con.State == ConnectionState.Open)
+                if (con.State == ConnectionState.Open)
                 {
                     con.Close();
                 }
@@ -89,7 +90,7 @@ namespace MSSQLConverter.Classes
             }
             finally
             {
-                if (con != null && con.State == ConnectionState.Open)
+                if (con.State == ConnectionState.Open)
                 {
                     con.Close();
                 }

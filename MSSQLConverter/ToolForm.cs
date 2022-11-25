@@ -12,7 +12,6 @@ using Renci.SshNet;
 
 namespace SqlServer2PostgreSQL
 {
-
     public partial class ToolForm
     {
         private SqlConnection myConn;
@@ -44,7 +43,8 @@ namespace SqlServer2PostgreSQL
             myConn = new SqlConnection("Server=10.10.111.140;Database=ABYSKASKI;User Id=insoftpro;Password=12345Qwe1");
             // Create a Command object.
             myCmd = myConn.CreateCommand();
-            myCmd.CommandText = @"select TABLE_NAME, count(*) over (partition by TABLE_NAME) FIELD_COUNT, ORDINAL_POSITION, COLUMN_NAME, COLLATION_NAME, DATA_TYPE, 
+            myCmd.CommandText =
+                @"select TABLE_NAME, count(*) over (partition by TABLE_NAME) FIELD_COUNT, ORDINAL_POSITION, COLUMN_NAME, COLLATION_NAME, DATA_TYPE, 
                                     COALESCE (CHARACTER_OCTET_LENGTH, coalesce((NUMERIC_PRECISION+2) * case DATA_TYPE when 'decimal' then 2 else 1 end,case DATA_TYPE when 'datetime2' then 30 when 'bit' then 1 end )) SIZE
                             from INFORMATION_SCHEMA.COLUMNS c 
                             where exists (select 1 from INFORMATION_SCHEMA.TABLES t where t.TABLE_SCHEMA ='dbo' and t.TABLE_NAME =c.TABLE_NAME and t.TABLE_TYPE ='Base Table')
@@ -59,7 +59,9 @@ namespace SqlServer2PostgreSQL
             {
                 if ((wr["TABLE_NAME"].ToString() ?? "") != (wtable ?? "") & !string.IsNullOrEmpty(wtable))
                 {
-                    wpre_delim = Conversions.ToString(Operators.ConcatenateObject(Interaction.IIf(wpre_datatype == "nvarchar", @"""\""\r\n", @"""\r\n"), "\""));
+                    wpre_delim =
+                        Conversions.ToString(Operators.ConcatenateObject(
+                            Interaction.IIf(wpre_datatype == "nvarchar", @"""\""\r\n", @"""\r\n"), "\""));
                     results = results + wpre_str1 + wpre_delim + "      " + wpre_str2;
                     File.WriteAllText(@"C:\tmp\" + wtable + ".fmt", results);
 
@@ -79,28 +81,44 @@ namespace SqlServer2PostgreSQL
                 wc = wc + 1;
                 if (wc == 1)
                 {
-                    results = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject("14.0" + Constants.vbCrLf, Operators.AddObject(wr.GetInt32(1), Interaction.IIf(wr["DATA_TYPE"].ToString() == "nvarchar", 1, 0))), Constants.vbCrLf));
+                    results = Conversions.ToString(Operators.ConcatenateObject(
+                        Operators.ConcatenateObject("14.0" + Constants.vbCrLf,
+                            Operators.AddObject(wr.GetInt32(1),
+                                Interaction.IIf(wr["DATA_TYPE"].ToString() == "nvarchar", 1, 0))), Constants.vbCrLf));
                     wc = Conversions.ToInteger(Interaction.IIf(wr["DATA_TYPE"].ToString() == "nvarchar", 2, 1));
                 }
 
                 if (string.IsNullOrEmpty(wpre_str1) & wr["DATA_TYPE"].ToString() == "nvarchar")
                 {
-                    results = results + @"1       SQLCHAR             0       0       ""\""""         0     FIRST_QUOTE                                                 Turkish_100_CI_AS" + Constants.vbCrLf;
+                    results = results +
+                              @"1       SQLCHAR             0       0       ""\""""         0     FIRST_QUOTE                                                 Turkish_100_CI_AS" +
+                              Constants.vbCrLf;
                 }
                 else if (!string.IsNullOrEmpty(wpre_str1))
                 {
-                    wpre_delim = Conversions.ToString(Operators.ConcatenateObject(Interaction.IIf(wpre_datatype == "nvarchar", @"""\""~", "\"~"), Interaction.IIf(wr["DATA_TYPE"].ToString() == "nvarchar", @"\""""", "\"")));
+                    wpre_delim = Conversions.ToString(Operators.ConcatenateObject(
+                        Interaction.IIf(wpre_datatype == "nvarchar", @"""\""~", "\"~"),
+                        Interaction.IIf(wr["DATA_TYPE"].ToString() == "nvarchar", @"\""""", "\"")));
                     results = results + wpre_str1 + wpre_delim + "      " + wpre_str2;
                 }
 
-                wpre_str1 = wc.ToString().PadRight(8) + "SQLCHAR             0       " + Interaction.IIf(wr["SIZE"] is DBNull, 1, wr["SIZE"]).ToString().PadRight(8);
+                wpre_str1 = wc.ToString().PadRight(8) + "SQLCHAR             0       " +
+                            Interaction.IIf(wr["SIZE"] is DBNull, 1, wr["SIZE"]).ToString().PadRight(8);
 
-                wpre_str2 = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(wr["ORDINAL_POSITION"].ToString().PadRight(6), wr["COLUMN_NAME"].ToString().PadRight(60)), Interaction.IIf(wr["COLLATION_NAME"] is DBNull, "\"\"", wr["COLLATION_NAME"])), Constants.vbCrLf));
+                wpre_str2 = Conversions.ToString(Operators.ConcatenateObject(
+                    Operators.ConcatenateObject(
+                        Operators.ConcatenateObject(wr["ORDINAL_POSITION"].ToString().PadRight(6),
+                            wr["COLUMN_NAME"].ToString().PadRight(60)),
+                        Interaction.IIf(wr["COLLATION_NAME"] is DBNull, "\"\"", wr["COLLATION_NAME"])),
+                    Constants.vbCrLf));
 
                 wpre_datatype = wr["DATA_TYPE"].ToString();
             }
 
-            wpre_delim = Conversions.ToString(Operators.ConcatenateObject(Interaction.IIf(wpre_datatype == "nvarchar", @"""\""\r\n", @"""\r\n"), "\""));
+            wpre_delim =
+                Conversions.ToString(
+                    Operators.ConcatenateObject(Interaction.IIf(wpre_datatype == "nvarchar", @"""\""\r\n", @"""\r\n"),
+                        "\""));
             results = results + wpre_str1 + wpre_delim + "      " + wpre_str2;
             File.WriteAllText(@"C:\tmp\" + wtable.ToLower() + ".fmt", results);
 
@@ -109,30 +127,34 @@ namespace SqlServer2PostgreSQL
             // Close the reader and the database connection.
             wr.Close();
             myConn.Close();
-
         }
 
         private string write_data(string pdt, string pdata)
         {
             string wcomma;
-            wcomma = Conversions.ToString(Interaction.IIf(LikeOperator.LikeString(pdt, "*varchar", CompareMethod.Binary), "\"", ""));
+            wcomma = Conversions.ToString(
+                Interaction.IIf(LikeOperator.LikeString(pdt, "*varchar", CompareMethod.Binary), "\"", ""));
             switch (pdt ?? "")
             {
                 case "decimal":
                 case "float":
                 case "numeric":
                 case "real":
-                    {
-                        pdata = pdata.Replace(",", ".");
-                        break;
-                    }
+                {
+                    pdata = pdata.Replace(",", ".");
+                    break;
+                }
                 case "bit":
-                    {
-                        pdata = Conversions.ToString(Interaction.IIf(pdata == "True", "1", Interaction.IIf(pdata == "False", "0", "")));
-                        break;
-                    }
+                {
+                    pdata = Conversions.ToString(Interaction.IIf(pdata == "True", "1",
+                        Interaction.IIf(pdata == "False", "0", "")));
+                    break;
+                }
             }
-            return Conversions.ToString(Operators.ConcatenateObject(Interaction.IIf(string.IsNullOrEmpty(pdata), "", wcomma + Strings.Replace(pdata, "\"", "") + wcomma), txtDelimeter.Text));
+
+            return Conversions.ToString(Operators.ConcatenateObject(
+                Interaction.IIf(string.IsNullOrEmpty(pdata), "", wcomma + Strings.Replace(pdata, "\"", "") + wcomma),
+                txtDelimeter.Text));
         }
 
         private void ExportTable(ListViewItem pItem)
@@ -147,7 +169,9 @@ namespace SqlServer2PostgreSQL
             Task wTask;
 
             wSqlCmd = myConn.CreateCommand();
-            wSqlCmd.CommandText = "select ORDINAL_POSITION, DATA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + pItem.Text + "' order by ORDINAL_POSITION";
+            wSqlCmd.CommandText =
+                "select ORDINAL_POSITION, DATA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + pItem.Text +
+                "' order by ORDINAL_POSITION";
             wSqlDR = wSqlCmd.ExecuteReader();
 
             i = 0;
@@ -167,6 +191,7 @@ namespace SqlServer2PostgreSQL
             {
                 wmaxRows = wSqlDR.GetInt32(0);
             }
+
             wSqlDR.Close();
 
             wSqlCmd = myConn.CreateCommand();
@@ -175,7 +200,8 @@ namespace SqlServer2PostgreSQL
 
             l = 0;
 
-            wfileName = txtFolder.Text + @"\" + txtDataBase.Text + @"\" + pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat";
+            wfileName = txtFolder.Text + @"\" + txtDataBase.Text + @"\" +
+                        pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat";
             tsslblStatus.Text = pItem.Text + " >> " + wfileName;
 
             try
@@ -184,7 +210,6 @@ namespace SqlServer2PostgreSQL
             }
             catch (Exception ex)
             {
-
             }
 
             try
@@ -208,15 +233,19 @@ namespace SqlServer2PostgreSQL
                             {
                                 wdata = wSqlDR[j].ToString();
                             }
+
                             wstr = wstr + write_data(Conversions.ToString(wdef[j]), wdata);
                         }
+
                         l = l + 1;
                         writer.WriteLine(wstr.Substring(0, wstr.Length - 1));
                     }
                 }
+
                 wSqlDR.Close();
 
-                tsslblStatus.Text = pItem.Text + " >> " + wfileName + " ... " + Strings.Format(wmaxRows, "#,####") + " / " + Strings.Format(l, "#,###") + " Rows";
+                tsslblStatus.Text = pItem.Text + " >> " + wfileName + " ... " + Strings.Format(wmaxRows, "#,####") +
+                                    " / " + Strings.Format(l, "#,###") + " Rows";
                 pItem.SubItems[2].Text = "OK";
             }
 
@@ -227,11 +256,17 @@ namespace SqlServer2PostgreSQL
 
             try
             {
-                wTask = Task.Run(() => SendFile(txtFolder.Text + @"\" + txtDataBase.Text, pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat"));
-                wTask.GetAwaiter().OnCompleted(() => LoadPostgreSQL(pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)), txtTargetFolder.Text + "/" + txtDataBase.Text + "/" + pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat", pItem));
+                wTask = Task.Run(() => SendFile(txtFolder.Text + @"\" + txtDataBase.Text,
+                    pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat"));
+                wTask.GetAwaiter().OnCompleted(() =>
+                    LoadPostgreSQL(pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)),
+                        txtTargetFolder.Text + "/" + txtDataBase.Text + "/" +
+                        pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat", pItem));
                 Application.DoEvents();
 
-                PrintLog("EXPORT " + pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat >> " + l + " Rows", 1, pItem.Text);
+                PrintLog(
+                    "EXPORT " + pItem.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + ".dat >> " +
+                    l + " Rows", 1, pItem.Text);
             }
             catch (Exception ex)
             {
@@ -277,7 +312,8 @@ namespace SqlServer2PostgreSQL
             }
 
             wPgCnn = new NpgsqlConnection();
-            wPgCnn.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" + txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432";
+            wPgCnn.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" +
+                                      txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432";
             wPgCnn.Open();
 
             foreach (ListViewItem items in lvScript.Items)
@@ -294,13 +330,11 @@ namespace SqlServer2PostgreSQL
                 {
                     PrintLog("Error", 0, ex.Message);
                 }
-
             }
 
             wPgCnn.Close();
 
             tsslblStatus.Text = "Task complated successful.";
-
         }
 
         private void Form1_Closed(object sender, EventArgs e)
@@ -333,20 +367,22 @@ namespace SqlServer2PostgreSQL
 
             try
             {
-                myConn = new SqlConnection("Server=" + txtServer.Text + ";Database=" + txtDataBase.Text + ";User Id=" + txtUserName.Text + ";Password=" + txtPassword.Text + ";MultipleActiveResultSets=True");
+                myConn = new SqlConnection("Server=" + txtServer.Text + ";Database=" + txtDataBase.Text + ";User Id=" +
+                                           txtUserName.Text + ";Password=" + txtPassword.Text +
+                                           ";MultipleActiveResultSets=True");
                 myConn.Open();
 
                 cmdTab = myConn.CreateCommand();
                 cmdTab.CommandText = @"Select  t.TABLE_NAME, x.RecordCount
-from INFORMATION_SCHEMA.TABLES t
-left join (SELECT A.Name AS TableName, SUM(B.rows) AS RecordCount
-          FROM sys.objects A
-          INNER JOIN sys.partitions B ON A.object_id = B.object_id
-          WHERE A.type = 'U'
-          GROUP BY A.schema_id, A.Name) x on (t.TABLE_NAME=x.TableName)
-where t.TABLE_SCHEMA ='dbo' 
-and t.TABLE_TYPE ='Base Table' 
-Order by x.RecordCount, t.TABLE_NAME";
+                                        from INFORMATION_SCHEMA.TABLES t
+                                        left join (SELECT A.Name AS TableName, SUM(B.rows) AS RecordCount
+                                                  FROM sys.objects A
+                                                  INNER JOIN sys.partitions B ON A.object_id = B.object_id
+                                                  WHERE A.type = 'U'
+                                                  GROUP BY A.schema_id, A.Name) x on (t.TABLE_NAME=x.TableName)
+                                        where t.TABLE_SCHEMA ='dbo' 
+                                        and t.TABLE_TYPE ='Base Table' 
+                                        Order by x.RecordCount, t.TABLE_NAME";
                 wrTab = cmdTab.ExecuteReader();
 
                 while (wrTab.Read())
@@ -402,7 +438,9 @@ Order by x.RecordCount, t.TABLE_NAME";
                 try
                 {
                     wCnnPg = new NpgsqlConnection();
-                    wCnnPg.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" + txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432";
+                    wCnnPg.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text +
+                                              ";USER ID=" + txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text +
+                                              ";PORT=5432";
                     wCnnPg.Open();
                     wCnnPg.Close();
                     PrintLog("PostgreSQL Connection", 1, "POSTGRESQL");
@@ -464,6 +502,7 @@ Order by x.RecordCount, t.TABLE_NAME";
                     {
                         Interaction.MsgBox(ex2.Message);
                     }
+
                     Interaction.MsgBox(ex.Message);
                 }
 
@@ -473,8 +512,8 @@ Order by x.RecordCount, t.TABLE_NAME";
                 }
                 catch (Exception ex)
                 {
-
                 }
+
                 try
                 {
                     using (Stream stream = File.OpenRead(pPath + @"\" + pFile))
@@ -486,6 +525,7 @@ Order by x.RecordCount, t.TABLE_NAME";
                 {
                     Interaction.MsgBox(ex.Message);
                 }
+
                 Application.DoEvents();
             }
         }
@@ -506,10 +546,20 @@ Order by x.RecordCount, t.TABLE_NAME";
             {
                 try
                 {
-                    using (var connection = new NpgsqlConnection("SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" + txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432; Timeout=1000; CommandTimeout=10000"))
+                    using (var connection = new NpgsqlConnection("SERVER=" + txtPGServer.Text + ";DATABASE=" +
+                                                                 txtPGDatabase.Text + ";USER ID=" + txtPGUserName.Text +
+                                                                 ";PASSWORD=" + txtPGPassword.Text +
+                                                                 ";PORT=5432; Timeout=1000; CommandTimeout=10000"))
                     {
                         NpgsqlDataReader dr;
-                        var cmd = new NpgsqlCommand("select 'truncate table '||table_schema||'.'||table_name truncate_sql, " + "'copy '||table_schema||'.'||table_name||' ('||STRING_AGG('\"'||column_name||'\"', ',' ORDER BY ordinal_position)||') FROM ''" + pfileName + "'' WITH DELIMITER ''~'' CSV ENCODING ''UTF-8'' ' wsql " + "from information_schema.columns c " + "where table_schema = '" + txtDataBase.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + "' " + "and table_name = '" + pTableName + "' " + "group by table_schema, table_name " + "order by 1", connection);
+                        var cmd = new NpgsqlCommand(
+                            "select 'truncate table '||table_schema||'.'||table_name truncate_sql, " +
+                            "'copy '||table_schema||'.'||table_name||' ('||STRING_AGG('\"'||column_name||'\"', ',' ORDER BY ordinal_position)||') FROM ''" +
+                            pfileName + "'' WITH DELIMITER ''~'' CSV ENCODING ''UTF-8'' ' wsql " +
+                            "from information_schema.columns c " + "where table_schema = '" +
+                            txtDataBase.Text.ToLower(new System.Globalization.CultureInfo("en-US", false)) + "' " +
+                            "and table_name = '" + pTableName + "' " + "group by table_schema, table_name " +
+                            "order by 1", connection);
 
                         cmd.Connection.Open();
                         dr = cmd.ExecuteReader();
@@ -541,14 +591,16 @@ Order by x.RecordCount, t.TABLE_NAME";
                     PrintLog("PostgreSQL - " + wSqlCopy + Constants.vbCrLf + ex.Message, 0, pTableName);
                     pItem.SubItems[4].Text = "FAIL";
                 }
+
                 Application.DoEvents();
             }
         }
 
         private void lvTables_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            lvTables.Columns[e.Column].ListView.Sorting = (System.Windows.Forms.SortOrder)Conversions.ToInteger(Interaction.IIf(lvTables.Columns[e.Column].ListView.Sorting == System.Windows.Forms.SortOrder.Ascending, System.Windows.Forms.SortOrder.Descending, System.Windows.Forms.SortOrder.Ascending));
-
+            lvTables.Columns[e.Column].ListView.Sorting = (System.Windows.Forms.SortOrder)Conversions.ToInteger(
+                Interaction.IIf(lvTables.Columns[e.Column].ListView.Sorting == System.Windows.Forms.SortOrder.Ascending,
+                    System.Windows.Forms.SortOrder.Descending, System.Windows.Forms.SortOrder.Ascending));
         }
 
         private void PrintLog(string pTopic, int pStatus, string pTableName)
@@ -560,9 +612,17 @@ Order by x.RecordCount, t.TABLE_NAME";
             }
             else
             {
-                txtOutput.Text = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " - ", Interaction.IIf(pStatus == 1, "SUCCESS", "FAIL")), " - "), pTableName), " - "), pTopic), Constants.vbCrLf), txtOutput.Text));
+                txtOutput.Text = Conversions.ToString(Operators.ConcatenateObject(
+                    Operators.ConcatenateObject(
+                        Operators.ConcatenateObject(
+                            Operators.ConcatenateObject(
+                                Operators.ConcatenateObject(
+                                    Operators.ConcatenateObject(
+                                        Operators.ConcatenateObject(
+                                            DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " - ",
+                                            Interaction.IIf(pStatus == 1, "SUCCESS", "FAIL")), " - "), pTableName),
+                                " - "), pTopic), Constants.vbCrLf), txtOutput.Text));
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -616,7 +676,8 @@ Order by x.RecordCount, t.TABLE_NAME";
             }
 
             wPgCnn = new NpgsqlConnection();
-            wPgCnn.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" + txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432";
+            wPgCnn.ConnectionString = "SERVER=" + txtPGServer.Text + ";DATABASE=" + txtPGDatabase.Text + ";USER ID=" +
+                                      txtPGUserName.Text + ";PASSWORD=" + txtPGPassword.Text + ";PORT=5432";
             wPgCnn.Open();
 
             foreach (ListViewItem witem in lvTables.SelectedItems)
@@ -626,7 +687,8 @@ Order by x.RecordCount, t.TABLE_NAME";
             try
             {
                 wSqlCmd = myConn.CreateCommand();
-                wSqlCmd.CommandText = @"select  TABLE_NAME, case when Lower(COLUMN_NAME)='not' then '""not""' else COLUMN_NAME end + ' ' + DATA_TYPE +' ' + case when DATA_TYPE in ('varchar','char', 'decimal','numeric') then data_size else '' end + ' ' + case when IS_NULLABLE='NO' then 'not null' else '' end COLUMN_DEF
+                wSqlCmd.CommandText =
+                    @"select  TABLE_NAME, case when Lower(COLUMN_NAME)='not' then '""not""' else COLUMN_NAME end + ' ' + DATA_TYPE +' ' + case when DATA_TYPE in ('varchar','char', 'decimal','numeric') then data_size else '' end + ' ' + case when IS_NULLABLE='NO' then 'not null' else '' end COLUMN_DEF
       from (select TABLE_NAME, ORDINAL_POSITION, replace(COLUMN_NAME,' ','_') COLUMN_NAME, IS_NULLABLE, 
               case when DATA_TYPE in ('nvarchar','uniqueidentifier','varchar') then case when CHARACTER_MAXIMUM_LENGTH>2000 or CHARACTER_MAXIMUM_LENGTH=-1 then 'text' else 'varchar' end
                    when DATA_TYPE in ('bit','tinyint') then 'smallint'
@@ -652,7 +714,8 @@ order by TABLE_NAME, ORDINAL_POSITION";
                 {
                     if (string.IsNullOrEmpty(wTableName))
                     {
-                        wCreateScript = "create table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " (" + Constants.vbCrLf;
+                        wCreateScript = "create table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " (" +
+                                        Constants.vbCrLf;
                     }
                     else if ((wTableName ?? "") != (wSqlDR.GetString(0) ?? ""))
                     {
@@ -663,12 +726,12 @@ order by TABLE_NAME, ORDINAL_POSITION";
                         tsslblStatus.Text = wTableName + " Table created ...";
                         Application.DoEvents();
 
-                        wCreateScript = "create table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " (" + Constants.vbCrLf;
+                        wCreateScript = "create table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " (" +
+                                        Constants.vbCrLf;
                     }
 
                     wCreateScript = wCreateScript + Constants.vbTab + wSqlDR.GetString(1) + "," + Constants.vbCrLf;
                     wTableName = wSqlDR.GetString(0);
-
                 }
 
                 CreateTable(wTableName, wCreateScript.Substring(0, wCreateScript.Length - 3) + ");", wPgCnn);
@@ -691,7 +754,8 @@ order by TABLE_NAME, ORDINAL_POSITION";
 
 
                 wSqlCmd = myConn.CreateCommand();
-                wSqlCmd.CommandText = @"select tc.TABLE_NAME, tc.CONSTRAINT_NAME, CONSTRAINT_TYPE, replace(ccu.COLUMN_NAME,' ','_') COLUMN_NAME
+                wSqlCmd.CommandText =
+                    @"select tc.TABLE_NAME, tc.CONSTRAINT_NAME, CONSTRAINT_TYPE, replace(ccu.COLUMN_NAME,' ','_') COLUMN_NAME
 from INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc 
 join INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE ccu on (tc.CONSTRAINT_NAME=ccu.CONSTRAINT_NAME and tc.TABLE_NAME=ccu.TABLE_NAME and tc.TABLE_SCHEMA=ccu.TABLE_SCHEMA)
 where CONSTRAINT_TYPE in ('PRIMARY KEY', 'UNIQUE')
@@ -709,31 +773,36 @@ order by tc.TABLE_NAME, tc.CONSTRAINT_NAME";
                 {
                     if (string.IsNullOrEmpty(wTableName))
                     {
-                        wCreateScript = "alter table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " add constraint " + wSqlDR.GetString(1) + " " + wSqlDR.GetString(2) + " (";
+                        wCreateScript = "alter table " + txtDataBase.Text + "." + wSqlDR.GetString(0) +
+                                        " add constraint " + wSqlDR.GetString(1) + " " + wSqlDR.GetString(2) + " (";
                     }
                     else if ((wTableName ?? "") != (wSqlDR.GetString(0) ?? ""))
                     {
-                        CreateConstraint(wTableName, wCreateScript.Substring(0, wCreateScript.Length - 1) + ");", wPgCnn, wCreateConstraint);
+                        CreateConstraint(wTableName, wCreateScript.Substring(0, wCreateScript.Length - 1) + ");",
+                            wPgCnn, wCreateConstraint);
 
                         wCounter = wCounter + 1;
                         tsspgTables.Value = wCounter;
                         tsslblStatus.Text = wTableName + " Table constraint created ...";
                         Application.DoEvents();
 
-                        wCreateScript = "alter table " + txtDataBase.Text + "." + wSqlDR.GetString(0) + " add constraint " + wSqlDR.GetString(1) + " " + wSqlDR.GetString(2) + " (";
+                        wCreateScript = "alter table " + txtDataBase.Text + "." + wSqlDR.GetString(0) +
+                                        " add constraint " + wSqlDR.GetString(1) + " " + wSqlDR.GetString(2) + " (";
                     }
 
                     wCreateScript = wCreateScript + wSqlDR.GetString(3) + ",";
                     wTableName = wSqlDR.GetString(0);
-
                 }
 
-                CreateConstraint(wTableName, wCreateScript.Substring(0, wCreateScript.Length - 1) + ");", wPgCnn, wCreateConstraint);
+                CreateConstraint(wTableName, wCreateScript.Substring(0, wCreateScript.Length - 1) + ");", wPgCnn,
+                    wCreateConstraint);
 
                 wCounter = wCounter + 1;
                 tsspgTables.Value = tsspgTables.Maximum;
 
-                PrintLog("-- Create Table Constraint" + Constants.vbCrLf, 1, Conversions.ToString(Operators.ConcatenateObject(wCounter + " tables constraint was ", Interaction.IIf(wCreateConstraint, "created", "prepared"))));
+                PrintLog("-- Create Table Constraint" + Constants.vbCrLf, 1,
+                    Conversions.ToString(Operators.ConcatenateObject(wCounter + " tables constraint was ",
+                        Interaction.IIf(wCreateConstraint, "created", "prepared"))));
                 wSqlDR.Close();
 
                 tsslblStatus.Text = tsspgTables.Value + " Table/s created ...";
@@ -766,6 +835,7 @@ order by tc.TABLE_NAME, tc.CONSTRAINT_NAME";
             {
                 Width = 1300;
             }
+
             if (Height < 530)
             {
                 Height = 530;
@@ -789,12 +859,15 @@ order by tc.TABLE_NAME, tc.CONSTRAINT_NAME";
                 {
                     if (!string.IsNullOrEmpty(Strings.Trim(wScript)))
                     {
-                        wItem = new ListViewItem();
-                        wItem.Text = wScript;
+                        wItem = new ListViewItem
+                        {
+                            Text = wScript
+                        };
                         wItem.SubItems.Add("");
                         lvScript.Items.Add(wItem);
                     }
                 }
+
                 txtScript.Select();
             }
         }
@@ -815,7 +888,6 @@ order by tc.TABLE_NAME, tc.CONSTRAINT_NAME";
 
         private void txtScript_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void txtScript_KeyDown(object sender, KeyEventArgs e)

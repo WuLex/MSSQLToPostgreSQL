@@ -111,7 +111,7 @@ namespace SqlServer2PostgreSQL
             // txtOutput
             // 
             this.txtOutput.Location = new System.Drawing.Point(8, 8);
-            this.txtOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOutput.Margin = new System.Windows.Forms.Padding(4);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -121,7 +121,7 @@ namespace SqlServer2PostgreSQL
             // cmdConnect
             // 
             this.cmdConnect.Location = new System.Drawing.Point(301, 415);
-            this.cmdConnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdConnect.Margin = new System.Windows.Forms.Padding(4);
             this.cmdConnect.Name = "cmdConnect";
             this.cmdConnect.Size = new System.Drawing.Size(363, 31);
             this.cmdConnect.TabIndex = 22;
@@ -132,7 +132,7 @@ namespace SqlServer2PostgreSQL
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(103, 151);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(127, 27);
@@ -151,10 +151,11 @@ namespace SqlServer2PostgreSQL
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(103, 112);
-            this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUserName.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(127, 27);
             this.txtUserName.TabIndex = 19;
+            this.txtUserName.Text = "sa";
             // 
             // Label3
             // 
@@ -169,10 +170,11 @@ namespace SqlServer2PostgreSQL
             // txtDataBase
             // 
             this.txtDataBase.Location = new System.Drawing.Point(103, 73);
-            this.txtDataBase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDataBase.Margin = new System.Windows.Forms.Padding(4);
             this.txtDataBase.Name = "txtDataBase";
             this.txtDataBase.Size = new System.Drawing.Size(127, 27);
             this.txtDataBase.TabIndex = 17;
+            this.txtDataBase.Text = "BlogDB";
             // 
             // Label2
             // 
@@ -187,10 +189,11 @@ namespace SqlServer2PostgreSQL
             // txtServer
             // 
             this.txtServer.Location = new System.Drawing.Point(103, 35);
-            this.txtServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(127, 27);
             this.txtServer.TabIndex = 15;
+            this.txtServer.Text = ".";
             // 
             // Label1
             // 
@@ -205,7 +208,7 @@ namespace SqlServer2PostgreSQL
             // btnFolder
             // 
             this.btnFolder.Location = new System.Drawing.Point(315, 109);
-            this.btnFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFolder.Margin = new System.Windows.Forms.Padding(4);
             this.btnFolder.Name = "btnFolder";
             this.btnFolder.Size = new System.Drawing.Size(35, 31);
             this.btnFolder.TabIndex = 30;
@@ -218,7 +221,7 @@ namespace SqlServer2PostgreSQL
             this.txtFolder.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtFolder.Enabled = false;
             this.txtFolder.Location = new System.Drawing.Point(121, 109);
-            this.txtFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFolder.Margin = new System.Windows.Forms.Padding(4);
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(185, 27);
             this.txtFolder.TabIndex = 29;
@@ -236,7 +239,7 @@ namespace SqlServer2PostgreSQL
             // txtDateFormat
             // 
             this.txtDateFormat.Location = new System.Drawing.Point(121, 72);
-            this.txtDateFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDateFormat.Margin = new System.Windows.Forms.Padding(4);
             this.txtDateFormat.Name = "txtDateFormat";
             this.txtDateFormat.Size = new System.Drawing.Size(185, 27);
             this.txtDateFormat.TabIndex = 27;
@@ -255,7 +258,7 @@ namespace SqlServer2PostgreSQL
             // txtDelimeter
             // 
             this.txtDelimeter.Location = new System.Drawing.Point(121, 33);
-            this.txtDelimeter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDelimeter.Margin = new System.Windows.Forms.Padding(4);
             this.txtDelimeter.MaxLength = 1;
             this.txtDelimeter.Name = "txtDelimeter";
             this.txtDelimeter.Size = new System.Drawing.Size(27, 27);
@@ -275,7 +278,7 @@ namespace SqlServer2PostgreSQL
             // txtTargetFolder
             // 
             this.txtTargetFolder.Location = new System.Drawing.Point(111, 149);
-            this.txtTargetFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTargetFolder.Margin = new System.Windows.Forms.Padding(4);
             this.txtTargetFolder.Name = "txtTargetFolder";
             this.txtTargetFolder.Size = new System.Drawing.Size(238, 27);
             this.txtTargetFolder.TabIndex = 30;
@@ -293,7 +296,7 @@ namespace SqlServer2PostgreSQL
             // txtSftpPassword
             // 
             this.txtSftpPassword.Location = new System.Drawing.Point(111, 111);
-            this.txtSftpPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSftpPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtSftpPassword.Name = "txtSftpPassword";
             this.txtSftpPassword.PasswordChar = '*';
             this.txtSftpPassword.Size = new System.Drawing.Size(127, 27);
@@ -312,7 +315,7 @@ namespace SqlServer2PostgreSQL
             // txtSftpUserName
             // 
             this.txtSftpUserName.Location = new System.Drawing.Point(111, 72);
-            this.txtSftpUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSftpUserName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSftpUserName.Name = "txtSftpUserName";
             this.txtSftpUserName.Size = new System.Drawing.Size(127, 27);
             this.txtSftpUserName.TabIndex = 25;
@@ -330,7 +333,7 @@ namespace SqlServer2PostgreSQL
             // txtSftpHost
             // 
             this.txtSftpHost.Location = new System.Drawing.Point(111, 35);
-            this.txtSftpHost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSftpHost.Margin = new System.Windows.Forms.Padding(4);
             this.txtSftpHost.Name = "txtSftpHost";
             this.txtSftpHost.Size = new System.Drawing.Size(127, 27);
             this.txtSftpHost.TabIndex = 23;
@@ -348,7 +351,7 @@ namespace SqlServer2PostgreSQL
             // txtPGPassword
             // 
             this.txtPGPassword.Location = new System.Drawing.Point(103, 151);
-            this.txtPGPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPGPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPGPassword.Name = "txtPGPassword";
             this.txtPGPassword.PasswordChar = '*';
             this.txtPGPassword.Size = new System.Drawing.Size(127, 27);
@@ -367,10 +370,11 @@ namespace SqlServer2PostgreSQL
             // txtPGUserName
             // 
             this.txtPGUserName.Location = new System.Drawing.Point(103, 112);
-            this.txtPGUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPGUserName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPGUserName.Name = "txtPGUserName";
             this.txtPGUserName.Size = new System.Drawing.Size(127, 27);
             this.txtPGUserName.TabIndex = 28;
+            this.txtPGUserName.Text = "postgres";
             // 
             // Label15
             // 
@@ -385,10 +389,11 @@ namespace SqlServer2PostgreSQL
             // txtPGDatabase
             // 
             this.txtPGDatabase.Location = new System.Drawing.Point(103, 73);
-            this.txtPGDatabase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPGDatabase.Margin = new System.Windows.Forms.Padding(4);
             this.txtPGDatabase.Name = "txtPGDatabase";
             this.txtPGDatabase.Size = new System.Drawing.Size(127, 27);
             this.txtPGDatabase.TabIndex = 26;
+            this.txtPGDatabase.Text = "BlogDB";
             // 
             // Label16
             // 
@@ -403,10 +408,11 @@ namespace SqlServer2PostgreSQL
             // txtPGServer
             // 
             this.txtPGServer.Location = new System.Drawing.Point(103, 35);
-            this.txtPGServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPGServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtPGServer.Name = "txtPGServer";
             this.txtPGServer.Size = new System.Drawing.Size(127, 27);
             this.txtPGServer.TabIndex = 24;
+            this.txtPGServer.Text = "localhost";
             // 
             // Label17
             // 
@@ -429,9 +435,9 @@ namespace SqlServer2PostgreSQL
             this.GroupBox1.Controls.Add(this.Label2);
             this.GroupBox1.Controls.Add(this.Label3);
             this.GroupBox1.Location = new System.Drawing.Point(19, 19);
-            this.GroupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.GroupBox1.Size = new System.Drawing.Size(251, 203);
             this.GroupBox1.TabIndex = 26;
             this.GroupBox1.TabStop = false;
@@ -449,9 +455,9 @@ namespace SqlServer2PostgreSQL
             this.GroupBox2.Controls.Add(this.txtPGDatabase);
             this.GroupBox2.Controls.Add(this.Label15);
             this.GroupBox2.Location = new System.Drawing.Point(19, 243);
-            this.GroupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.GroupBox2.Size = new System.Drawing.Size(249, 203);
             this.GroupBox2.TabIndex = 27;
             this.GroupBox2.TabStop = false;
@@ -463,7 +469,7 @@ namespace SqlServer2PostgreSQL
             this.chkPostgreSQL.Checked = true;
             this.chkPostgreSQL.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPostgreSQL.Location = new System.Drawing.Point(213, 4);
-            this.chkPostgreSQL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkPostgreSQL.Margin = new System.Windows.Forms.Padding(4);
             this.chkPostgreSQL.Name = "chkPostgreSQL";
             this.chkPostgreSQL.Size = new System.Drawing.Size(18, 17);
             this.chkPostgreSQL.TabIndex = 31;
@@ -482,9 +488,9 @@ namespace SqlServer2PostgreSQL
             this.GroupBox3.Controls.Add(this.Label11);
             this.GroupBox3.Controls.Add(this.Label10);
             this.GroupBox3.Location = new System.Drawing.Point(301, 19);
-            this.GroupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.GroupBox3.Name = "GroupBox3";
-            this.GroupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.GroupBox3.Size = new System.Drawing.Size(363, 203);
             this.GroupBox3.TabIndex = 28;
             this.GroupBox3.TabStop = false;
@@ -496,7 +502,7 @@ namespace SqlServer2PostgreSQL
             this.chkSFTP.Checked = true;
             this.chkSFTP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSFTP.Location = new System.Drawing.Point(330, 4);
-            this.chkSFTP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkSFTP.Margin = new System.Windows.Forms.Padding(4);
             this.chkSFTP.Name = "chkSFTP";
             this.chkSFTP.Size = new System.Drawing.Size(18, 17);
             this.chkSFTP.TabIndex = 31;
@@ -513,9 +519,9 @@ namespace SqlServer2PostgreSQL
             this.GroupBox4.Controls.Add(this.txtDelimeter);
             this.GroupBox4.Controls.Add(this.Label7);
             this.GroupBox4.Location = new System.Drawing.Point(301, 243);
-            this.GroupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.GroupBox4.Name = "GroupBox4";
-            this.GroupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.GroupBox4.Size = new System.Drawing.Size(363, 159);
             this.GroupBox4.TabIndex = 29;
             this.GroupBox4.TabStop = false;
@@ -557,7 +563,7 @@ namespace SqlServer2PostgreSQL
             this.lvTables.FullRowSelect = true;
             this.lvTables.GridLines = true;
             this.lvTables.Location = new System.Drawing.Point(15, 16);
-            this.lvTables.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvTables.Margin = new System.Windows.Forms.Padding(4);
             this.lvTables.Name = "lvTables";
             this.lvTables.Size = new System.Drawing.Size(630, 555);
             this.lvTables.TabIndex = 35;
@@ -599,7 +605,7 @@ namespace SqlServer2PostgreSQL
             this.tabControl.Controls.Add(this.tpSettings);
             this.tabControl.Controls.Add(this.tpOuput);
             this.tabControl.Location = new System.Drawing.Point(654, 16);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(995, 723);
@@ -614,9 +620,9 @@ namespace SqlServer2PostgreSQL
             this.tpSettings.Controls.Add(this.GroupBox2);
             this.tpSettings.Controls.Add(this.GroupBox1);
             this.tpSettings.Location = new System.Drawing.Point(4, 29);
-            this.tpSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpSettings.Margin = new System.Windows.Forms.Padding(4);
             this.tpSettings.Name = "tpSettings";
-            this.tpSettings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpSettings.Padding = new System.Windows.Forms.Padding(4);
             this.tpSettings.Size = new System.Drawing.Size(987, 690);
             this.tpSettings.TabIndex = 0;
             this.tpSettings.Text = "Settings";
@@ -629,9 +635,9 @@ namespace SqlServer2PostgreSQL
             this.GroupBox5.Controls.Add(this.txtScript);
             this.GroupBox5.Controls.Add(this.Label5);
             this.GroupBox5.Location = new System.Drawing.Point(21, 461);
-            this.GroupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.GroupBox5.Name = "GroupBox5";
-            this.GroupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GroupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.GroupBox5.Size = new System.Drawing.Size(643, 216);
             this.GroupBox5.TabIndex = 32;
             this.GroupBox5.TabStop = false;
@@ -640,7 +646,7 @@ namespace SqlServer2PostgreSQL
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(598, 28);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(35, 31);
             this.btnAdd.TabIndex = 31;
@@ -656,7 +662,7 @@ namespace SqlServer2PostgreSQL
             this.lvScript.FullRowSelect = true;
             this.lvScript.GridLines = true;
             this.lvScript.Location = new System.Drawing.Point(9, 73);
-            this.lvScript.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvScript.Margin = new System.Windows.Forms.Padding(4);
             this.lvScript.Name = "lvScript";
             this.lvScript.Size = new System.Drawing.Size(621, 133);
             this.lvScript.TabIndex = 39;
@@ -678,7 +684,7 @@ namespace SqlServer2PostgreSQL
             // txtScript
             // 
             this.txtScript.Location = new System.Drawing.Point(66, 20);
-            this.txtScript.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtScript.Margin = new System.Windows.Forms.Padding(4);
             this.txtScript.Multiline = true;
             this.txtScript.Name = "txtScript";
             this.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -701,9 +707,9 @@ namespace SqlServer2PostgreSQL
             // 
             this.tpOuput.Controls.Add(this.txtOutput);
             this.tpOuput.Location = new System.Drawing.Point(4, 29);
-            this.tpOuput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpOuput.Margin = new System.Windows.Forms.Padding(4);
             this.tpOuput.Name = "tpOuput";
-            this.tpOuput.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpOuput.Padding = new System.Windows.Forms.Padding(4);
             this.tpOuput.Size = new System.Drawing.Size(987, 690);
             this.tpOuput.TabIndex = 1;
             this.tpOuput.Text = "Output";
@@ -712,7 +718,7 @@ namespace SqlServer2PostgreSQL
             // btnExport
             // 
             this.btnExport.Location = new System.Drawing.Point(332, 580);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(315, 31);
             this.btnExport.TabIndex = 37;
@@ -723,7 +729,7 @@ namespace SqlServer2PostgreSQL
             // cmdCreateTable
             // 
             this.cmdCreateTable.Location = new System.Drawing.Point(15, 580);
-            this.cmdCreateTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdCreateTable.Margin = new System.Windows.Forms.Padding(4);
             this.cmdCreateTable.Name = "cmdCreateTable";
             this.cmdCreateTable.Size = new System.Drawing.Size(315, 31);
             this.cmdCreateTable.TabIndex = 38;
@@ -736,7 +742,7 @@ namespace SqlServer2PostgreSQL
             this.HelpProvider1.HelpNamespace = "D:\\Projeler\\KASKI\\Aktarim\\format_dosyasi_hazirla\\Help\\SQL Server to PostgreSQL Da" +
     "ta Transfer Documentation.htm";
             // 
-            // Form1
+            // ToolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -750,8 +756,8 @@ namespace SqlServer2PostgreSQL
             this.HelpProvider1.SetHelpKeyword(this, "SQL Server to PostgreSQL Data Transfer Documentation.htm");
             this.HelpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "ToolForm";
             this.HelpProvider1.SetShowHelp(this, true);
             this.Text = "SQL Server to PostgreSQL";
             this.Closed += new System.EventHandler(this.Form1_Closed);

@@ -66,7 +66,7 @@ namespace MSSQLConverter.Classes
             }
             finally
             {
-                if (con != null && con.State == ConnectionState.Open)
+                if (con.State == ConnectionState.Open)
                 {
                     con.Close();
                 }
