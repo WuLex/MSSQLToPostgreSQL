@@ -7,7 +7,10 @@ namespace MSSQLConverter.Classes
     /// </summary>
     public static class Utility
     {
-        public static Settings ConversionSettings = new Settings();
+        public static Settings ConversionSettings = new Settings()
+        {
+            ConvertTables = true
+        };
         public const string _MAPPINGDT_NAME = "typesmap";
         public const string _MAPPINGDS_NAME = "mapDS";
         public const string _MAPPING_FILENAME = "typesmap.xml";

@@ -71,8 +71,6 @@ namespace MSSQLConverter.Classes
                     con.Close();
                 }
             }
-
-
             return result;
         }
 

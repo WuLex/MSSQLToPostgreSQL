@@ -36,6 +36,7 @@ namespace MSSQLConverter
         private void MainFormLoad(object sender, EventArgs e)
         {
             SettingspropertyGrid.SelectedObject = Utility.ConversionSettings;
+
             LoadMappings();
         }
 
