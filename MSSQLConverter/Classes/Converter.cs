@@ -31,11 +31,36 @@ namespace MSSQLConverter.Classes
 
             try
             {
+                //转换表
                 if (m_ConversionSettings.ConvertTables)
                 {
                     ConvertTables();
                 }
+                //转换函数
+                if (m_ConversionSettings.ConvertFunctions)
+                {
+                  
+                }
+                //转换视图
+                if (m_ConversionSettings.ConvertViews)
+                {
+                  
+                }
+                //转换存储过程
+                if (m_ConversionSettings.ConvertStoredProcedures)
+                {
+                 
+                }
+                //转换触发器
+                if (m_ConversionSettings.ConvertTriggers)
+                {
+                    
+                }
+                //转换其他待定
+                if (m_ConversionSettings.ConvertDaiding)
+                {
 
+                }
                 result = true;
             }
             catch (Exception)

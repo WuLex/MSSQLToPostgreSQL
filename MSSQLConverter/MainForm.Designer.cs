@@ -125,7 +125,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(215, 132);
+            this.pictureBox1.Size = new System.Drawing.Size(308, 132);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -438,9 +438,9 @@
             this.label1.Location = new System.Drawing.Point(18, 37);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(201, 27);
+            this.label1.Size = new System.Drawing.Size(223, 27);
             this.label1.TabIndex = 0;
-            this.label1.Text = "SQL Server Instance";
+            this.label1.Text = "SQL Server 实例服务器";
             // 
             // tabPage2
             // 
