@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Text;
 using Dapper;
 using Npgsql;
+using System.Xml.Linq;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace MSSQLConverter.Classes
 {
@@ -18,11 +20,54 @@ namespace MSSQLConverter.Classes
         private baseSQLServer m_ToServer = null;
         private Settings m_ConversionSettings;
 
+        //sqlserver连接字符串
+        string mssqlConnectionString =string.Empty;
+        //postgresql连接字符串
+        string npgsqlConnectionString = string.Empty;
+
+
+
         public Converter(baseSQLServer FromServer, baseSQLServer ToServer, Settings ConversionSettings)
         {
             m_FromServer = FromServer;
             m_ToServer = ToServer;
             m_ConversionSettings = ConversionSettings;
+
+
+            #region SqlServer连接字符串
+
+            var server = m_FromServer.ServerName;
+            var db = m_FromServer.Database;
+
+            var connectionStringBuilder = new SqlConnectionStringBuilder
+            {
+                DataSource = server,
+                InitialCatalog = db,
+                IntegratedSecurity = true
+            };
+
+            connectionString=connectionStringBuilder.ConnectionString;
+
+            #endregion
+
+            #region Postgresql连接字符串
+
+            var npgsqlConnectionStringBuilder = new NpgsqlConnectionStringBuilder
+            {
+                Host = m_ToServer.ServerName,
+                Port = 5432,
+                Database = m_ToServer.Database,
+                Username = m_ToServer.Username,
+                Password = m_ToServer.Password,
+                Encoding = "UTF8",
+                Timeout = 30,
+                CommandTimeout = 30
+            };
+
+            npgsqlConnectionString = npgsqlConnectionStringBuilder.ConnectionString;
+
+            #endregion
+
         }
 
         public bool Convert()
@@ -76,43 +121,7 @@ namespace MSSQLConverter.Classes
         {
             //
             StringBuilder sql = new StringBuilder();
-
-            #region SqlServer连接字符串
-
-            var server = m_FromServer.ServerName;
-            var db = m_FromServer.Database;
-
-            var connectionStringBuilder = new SqlConnectionStringBuilder
-            {
-                DataSource = server,
-                InitialCatalog = db,
-                IntegratedSecurity = true
-            };
-
-            //sqlserver连接字符串
-            string connectionString = connectionStringBuilder.ConnectionString;
-
-            #endregion
-
-            #region Postgresql连接字符串
-
-            var npgsqlConnectionStringBuilder = new NpgsqlConnectionStringBuilder
-            {
-                Host = m_ToServer.ServerName,
-                Port = 5432,
-                Database = m_ToServer.Database,
-                Username = m_ToServer.Username,
-                Password = m_ToServer.Password,
-                Encoding= "UTF8",
-                Timeout = 30,
-                CommandTimeout = 30
-            };
-
-            //postgresql连接字符串
-            string npgsqlConnectionString = npgsqlConnectionStringBuilder.ConnectionString;
-
-            #endregion
-
+             
             #region 判断postgresql里数据库是否存在
 
             using (NpgsqlConnection psqlConnection = new NpgsqlConnection(npgsqlConnectionString))
@@ -144,9 +153,9 @@ namespace MSSQLConverter.Classes
             #endregion
 
 
-            #region 从SQL server获取表, 生成pgsql脚本
+            #region 从SQL server获取表, 生成pgsql创建数据表sql脚本
 
-            using (var cn = new SqlConnection(connectionString))
+            using (var cn = new SqlConnection(mssqlConnectionString))
             {
                 //表信息
                 var tables = cn.Query(@"select * from INFORMATION_SCHEMA.TABLES");
@@ -299,7 +308,6 @@ namespace MSSQLConverter.Classes
 
             #endregion
 
-            // OUTPUT SQL FILE AND OPEN
             File.WriteAllText("output.txt", sql.ToString());
 
             //Process.Start("output.txt");
@@ -370,5 +378,72 @@ namespace MSSQLConverter.Classes
                 sql.Append(column.DATA_TYPE);
             }
         }
+
+        private void ConvertViews()
+        {
+            //创建视图sql
+            StringBuilder createViewSql = new StringBuilder();
+            string sourceConnectionString = mssqlConnectionString;
+            string destinationConnectionString = npgsqlConnectionString;
+             
+            #region 从SQL server获取表, 生成pgsql创建视图sql脚本
+            using (SqlConnection sourceConnection = new SqlConnection(sourceConnectionString))
+            {
+                //视图列表信息
+                //SELECT definition, uses_ansi_nulls, uses_quoted_identifier, is_schema_bound FROM sys.sql_modules
+
+                //SELECT Name,--视图名字
+                //Definition--视图内容
+                //FROM sys.sql_modules AS m INNER JOIN sys.all_objects AS o ON m.object_id = o.object_id WHERE o.[type]= 'v'
+
+                //SELECT* FROM sys.sql_modules AS m INNER JOIN sys.all_objects AS o ON m.object_id = o.object_id
+                
+                var views = sourceConnection.Query(@"select TABLE_NAME,VIEW_DEFINITION from INFORMATION_SCHEMA.VIEWS");
+
+                //sourceConnection.Open();
+
+                foreach (var view in views)
+                {
+                    createViewSql.AppendLine(view.VIEW_DEFINITION.Replace("dbo","public"));
+                    
+                    #region 无用方法
+                    //using (SqlCommand sourceCommand = new SqlCommand($"SELECT * FROM  INFORMATION_SCHEMA.VIEW_COLUMN_USAGE WHERE VIEW_NAME='{view.TABLE_NAME}'", sourceConnection))
+                    //{
+                    //    using (SqlDataReader reader = sourceCommand.ExecuteReader())
+                    //    {
+                    //        string createViewSql = $"CREATE VIEW {view.TABLE_NAME} AS SELECT ";
+                    //        for (int i = 0; i < reader.FieldCount; i++)
+                    //        {
+                    //            createViewSql += reader.GetName(i);
+                    //            if (i < reader.FieldCount - 1)
+                    //            {
+                    //                createViewSql += ", ";
+                    //            }
+                    //        }
+                    //        createViewSql += " FROM SourceTable";
+                    //    }
+                    //} 
+                    #endregion
+                }
+                 
+            }
+            #endregion
+
+            #region 执行pgsql脚本
+
+            using (NpgsqlConnection destinationConnection = new NpgsqlConnection(destinationConnectionString))
+            {
+                    destinationConnection.Open();
+                   
+                            using (NpgsqlCommand destinationCommand = new NpgsqlCommand(createViewSql.ToString(), destinationConnection))
+                            {
+                                destinationCommand.ExecuteNonQuery();
+                            }
+            }
+           
+            #endregion
+            Console.WriteLine("视图转换完成");
+        }
+    }
     }
 }
