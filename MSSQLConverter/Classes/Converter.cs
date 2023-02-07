@@ -46,7 +46,7 @@ namespace MSSQLConverter.Classes
                 IntegratedSecurity = true
             };
 
-            connectionString=connectionStringBuilder.ConnectionString;
+            mssqlConnectionString = connectionStringBuilder.ConnectionString;
 
             #endregion
 
@@ -89,7 +89,7 @@ namespace MSSQLConverter.Classes
                 //转换视图
                 if (m_ConversionSettings.ConvertViews)
                 {
-                  
+                    ConvertViews();
                 }
                 //转换存储过程
                 if (m_ConversionSettings.ConvertStoredProcedures)
@@ -404,8 +404,12 @@ namespace MSSQLConverter.Classes
 
                 foreach (var view in views)
                 {
-                    createViewSql.AppendLine(view.VIEW_DEFINITION.Replace("dbo","public"));
-                    
+                    createViewSql.AppendLine(view.VIEW_DEFINITION.Replace("dbo","public").Replace("[","").Replace("]", ""));
+
+                    if (!createViewSql.ToString().EndsWith(";"))
+                    {
+                        createViewSql.AppendLine(";");
+                    }
                     #region 无用方法
                     //using (SqlCommand sourceCommand = new SqlCommand($"SELECT * FROM  INFORMATION_SCHEMA.VIEW_COLUMN_USAGE WHERE VIEW_NAME='{view.TABLE_NAME}'", sourceConnection))
                     //{
@@ -433,17 +437,25 @@ namespace MSSQLConverter.Classes
 
             using (NpgsqlConnection destinationConnection = new NpgsqlConnection(destinationConnectionString))
             {
-                    destinationConnection.Open();
-                   
-                            using (NpgsqlCommand destinationCommand = new NpgsqlCommand(createViewSql.ToString(), destinationConnection))
-                            {
-                                destinationCommand.ExecuteNonQuery();
-                            }
+                try
+                {
+                    var executeFlag = destinationConnection.Execute(createViewSql.ToString());
+                    MessageBox.Show(executeFlag == -1 ? "执行成功" : "执行失败");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    MessageBox.Show(e.Message);
+                }
+                //destinationConnection.Open();
+                //using (NpgsqlCommand destinationCommand = new NpgsqlCommand(createViewSql.ToString(), destinationConnection))
+                //{
+                //    destinationCommand.ExecuteNonQuery();
+                //}
             }
            
             #endregion
             Console.WriteLine("视图转换完成");
         }
-    }
     }
 }
